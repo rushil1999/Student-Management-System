@@ -1,0 +1,9 @@
+
+<mat-card class = "middlebox">
+    <mat-card-title>You Courses</mat-card-title>
+    <mat-nav-list *ngFor = "let course of courses">
+        <mat-list-item  >
+            {{course.name}}
+        </mat-list-item>
+    </mat-nav-list>
+</mat-card>

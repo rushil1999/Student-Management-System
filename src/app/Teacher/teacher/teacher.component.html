@@ -1,0 +1,77 @@
+ 
+ <body>
+    <mat-card class = "leftbox">
+        <mat-card-title>Catgories</mat-card-title>
+        <mat-nav-list >
+            <mat-list-item (click)="goToAddCourse()" >Add</mat-list-item>
+            <mat-list-item (click)="goToViewCourses()" >View</mat-list-item>
+            <br>
+            <button mat-raised-button color = "warn" (click) ="signOut()">Sign Out</button>
+        </mat-nav-list>
+    </mat-card>
+
+    <container-element  [ngSwitch]="selector">
+        <app-teacher-course *ngSwitchCase = "1"></app-teacher-course>
+        <app-course-addition-form *ngSwitchCase = "2"  (courseAdditionEvent) = "getCourseFromChild($event)"></app-course-addition-form>
+    </container-element>
+
+
+</body>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <!-- <div >
+    <button mat-raised-button class="menu-button" (click)="drawer.toggle()">
+        <b> Menu </b>
+    </button>
+
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+
+            <button mat-raised-button color="accent"> Add Course </button>
+            <br><br>
+            <button mat-raised-button color="accent"> Sign Out </button>
+
+
+        </mat-drawer>
+
+    </mat-drawer-container>
+</div>  
+
+<div class="courses-of-teacher-container">
+    <app-course-addition-form (courseAdditionEvent) = "getCourseFromChild($event)"></app-course-addition-form>
+</div>  -->
+
+
+<!-- <div class = "courses-of-teacher-container">
+    <mat-nav-list>
+        <mat-list-item>
+            <a>dawdawdawd</a>
+           <button mat-icon-button >
+              <mat-icon>info</mat-icon>
+           </button>
+        </mat-list-item>
+      </mat-nav-list> 
+</div> -->
+    
+
+
+
+  

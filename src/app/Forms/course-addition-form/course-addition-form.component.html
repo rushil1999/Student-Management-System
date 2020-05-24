@@ -1,0 +1,45 @@
+<div class = "middlebox">
+    <mat-card>
+        <form [formGroup] = "courseAdditionForm">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput placeholder = "Name" formControlName = "name">
+                <mat-error *ngIf = "(courseAdditionForm.get('name').dirty || courseAdditionForm.get('name').touched) && 
+                courseAdditionForm.get('name').errors?.maxlength">
+                Character limit excedded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Outline</mat-label>
+                <input matInput placeholder = "Oultine" formControlName = "outline">
+                <mat-error *ngIf = "(courseAdditionForm.get('outline').dirty || courseAdditionForm.get('outline').touched) && 
+                courseAdditionForm.get('outline').errors?.maxlength">
+                Character limit excedded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Capacity</mat-label>
+                <input matInput placeholder = "Capacity" formControlName = "capacity">
+                <mat-error *ngIf = "(courseAdditionForm.get('capacity').dirty || courseAdditionForm.get('capacity').touched) &&
+                courseAdditionForm.get('capacity').errors?.error">
+                Must Be Numeric 
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Credits</mat-label>
+                <mat-select formControlName="credits">
+                    <mat-option *ngFor="let credit of credits" [value]="credit">
+                        {{ credit }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color = "accent"  [disabled] = "!courseAdditionForm.valid" (click) = "fetchDetails()">Add</button>
+        </form>
+    </mat-card>
+</div>
+
+

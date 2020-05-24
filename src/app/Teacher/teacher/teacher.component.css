@@ -1,0 +1,49 @@
+.example-container {
+    width: 200px;
+    height: 900px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    position: absolute;
+  
+  }
+  
+  .example-sidenav-content {
+
+    display: auto;
+    height: 100%;
+    background-color: burlywood;
+    justify-content: left;
+    align-items: center;
+  }
+  
+  .example-sidenav {
+    
+    background-color: burlywood;
+  }
+  
+  .menu-button
+  {
+      height:50px;
+      width: 200px;
+      background-color: rgb(255, 208, 0);
+  }
+  .Sign-out-button
+  {
+      height:20px;
+      width: 180px;
+      background-color: rgb(109, 233, 136);
+  }
+  .courses-of-teacher-container{
+      margin-left:30%; 
+      align-items: center;
+      float:right;
+      margin-top: 50px;
+      position:absolute;
+  }
+
+  .leftbox { 
+    float:left;  
+    position: relative;
+    border: 3px solid #f305a4;
+    width:12%; 
+    margin-left: 15px;
+  } 

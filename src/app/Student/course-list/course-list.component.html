@@ -1,0 +1,28 @@
+<div class = "middlebox">
+    <mat-card>
+        <mat-list *ngFor = "let packet of packets">
+            <mat-list-item>
+                {{packet.course.name}}
+                <hr>
+                <button mat-raised-button color = "accent" (click) = "addCourse(packet)">Add</button>
+                <button mat-raised-button color = "accent" (click) = "showDetails(packet)">Details</button>
+            </mat-list-item>
+            
+        </mat-list>
+        
+        <br>
+        <mat-card-title>Selected</mat-card-title>
+        <mat-list *ngFor = "let packet of studentCourses">
+            <mat-list-item>
+                {{packet.course.name}}
+                <hr>
+                <button mat-raised-button color = "accent" (click) = "showDetails(packet)">Details</button>
+            </mat-list-item>
+        </mat-list>
+        <br>
+        <button mat-raised-button color = "accent" (click) = "saveCourses()">Save</button>
+        <button mat-raised-button color = "accent" (click) = "refreshList()"> Refresh</button>
+    </mat-card>
+</div>
+
+

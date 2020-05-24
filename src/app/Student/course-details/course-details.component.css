@@ -1,0 +1,9 @@
+.rightbox{ 
+    float:right; 
+    position: absolute;
+    border: 3px solid #f305a4; 
+    width: 20%;
+    margin-left: 1150px;
+    
+  }
+  

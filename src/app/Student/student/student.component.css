@@ -1,0 +1,7 @@
+.leftbox { 
+    float:left;  
+    position: relative;
+    border: 3px solid #f305a4;
+    width:12%; 
+    margin-left: 15px;
+  } 

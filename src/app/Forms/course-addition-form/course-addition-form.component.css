@@ -1,0 +1,19 @@
+.middlebox{
+    width: 57%;
+    position: absolute;
+    float: center;
+    margin-left:250px;
+    margin-right: 500px; 
+    border: 3px solid #f305a4;
+    
+}
+
+.box{
+    width: 57%;
+    position: relative;
+    float: center;
+    margin-right: 500px; 
+
+    
+}
+
