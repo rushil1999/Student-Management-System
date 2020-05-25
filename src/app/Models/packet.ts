@@ -1,5 +1,5 @@
-import { Course } from '../course';
-import { Teacher } from '../Teacher/teacher';
+import { Course } from './course';
+import { Teacher } from './teacher';
 
 export class Packet{
 

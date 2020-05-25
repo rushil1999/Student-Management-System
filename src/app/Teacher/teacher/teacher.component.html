@@ -12,7 +12,11 @@
 
     <container-element  [ngSwitch]="selector">
         <app-teacher-course *ngSwitchCase = "1"></app-teacher-course>
-        <app-course-addition-form *ngSwitchCase = "2"  (courseAdditionEvent) = "getCourseFromChild($event)"></app-course-addition-form>
+        <app-course-addition-form *ngSwitchCase = "2"  (courseAdditionEvent) = "getCourseFromChild($event)">
+        </app-course-addition-form>
+
+        <app-course-grading *ngSwitchCase = "3"> 
+        </app-course-grading>
     </container-element>
 
 

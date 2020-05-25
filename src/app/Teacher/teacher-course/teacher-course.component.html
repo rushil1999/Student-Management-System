@@ -4,6 +4,8 @@
     <mat-nav-list *ngFor = "let course of courses">
         <mat-list-item  >
             {{course.name}}
+            <hr>
+            <button mat-raised-button color = "accent" (click) = "goToCourseDetails(course.name)">Details</button>
         </mat-list-item>
     </mat-nav-list>
 </mat-card>

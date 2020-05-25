@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
-import { Course } from '../../course';
+import { Course } from '../../Models/course';
 import { EventEmitter } from '@angular/core';
 import { formValidatorIsNumeric} from '../form-validators';
 

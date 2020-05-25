@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Packet } from '../packet';
+import { Packet } from '../../Models/packet';
 import { StudentService } from '../student.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -15,8 +16,21 @@ export class StudentComponent implements OnInit {
   selector: number;
 
   packet: Packet;
+  navigationSubscription: any;
 
-  constructor( private studentService: StudentService ) { }
+  constructor( private studentService: StudentService,
+    private router: Router ) { 
+      this.selector = 0;
+
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationEnd) {
+          //console.log(" Parent Re-initialised");
+          // this.ngOnInit();
+        }
+      });
+
+    }
 
   ngOnInit(): void {
     this.selector = 1;
@@ -32,7 +46,7 @@ export class StudentComponent implements OnInit {
     this.packet = packet;
   }
 
-
+  //Receiving packets from Child
   getPacketListFromChild(packets: Array<Packet> ){
 
     //console.log("Packets received from child");
@@ -41,7 +55,9 @@ export class StudentComponent implements OnInit {
     if(packets.length>0){
       this.studentService.saveStudentCourses(packets).subscribe(
         data => {
-          console.log("Courses Saved");
+          window.alert(data);
+          console.log(this.router.url);
+          this.router.navigate(["/student"]);
         }, 
         error => {
           console.log(error);
@@ -52,6 +68,11 @@ export class StudentComponent implements OnInit {
       
       window.alert("No courses selected");
     }
+  }
+
+  signOut():void{
+    this.router.navigate(["/login"]);
+    
   }
 
 }

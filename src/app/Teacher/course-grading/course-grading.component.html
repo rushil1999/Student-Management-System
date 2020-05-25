@@ -1,0 +1,22 @@
+<div class = "middlebox">
+    <mat-card>
+        <mat-list *ngFor = "let student of students">
+            <mat-list-item>
+                {{student.student.id}} &nbsp;
+                {{student.student.fname}} {{student.student.lname}} &nbsp;
+                {{student.student.program}} &nbsp;
+                {{student.student.semester}}  &nbsp;
+                &nbsp; &nbsp;
+
+                
+                <mat-select class = "select"  [(ngModel)] = 'student.grade'>
+                    <mat-option *ngFor="let grade of grades" [value] = "grade" >
+                        {{ grade }}
+                    </mat-option>
+                </mat-select>
+                
+            </mat-list-item>
+        </mat-list>
+        <button mat-raised-button color = "accent" (click) = "saveGrades()">Save</button>
+    </mat-card>
+</div>

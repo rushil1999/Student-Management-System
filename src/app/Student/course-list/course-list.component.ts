@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Packet } from '../packet'
+import { Packet } from '../../Models/packet'
 import { StudentService } from '../student.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,20 @@ export class CourseListComponent implements OnInit {
   //List of courses already taken by student.
   studentCourses: Array<Packet>; 
 
-  constructor( private studentService: StudentService ) { }
+  navigationSubscription: any;
+
+  constructor( private studentService: StudentService,
+    private route: Router ) { 
+
+    this.navigationSubscription = this.route.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        //console.log(" Child Re-initialised");
+        this.ngOnInit();
+      }
+    });
+
+  }
 
   ngOnInit(): void {
     this.getOptedCourseList();
@@ -48,7 +62,7 @@ export class CourseListComponent implements OnInit {
         this.initializeCourseList(data);
       },
       error => {
-        console.log("error");
+        console.log(error);
       }
 
     )
@@ -66,7 +80,7 @@ export class CourseListComponent implements OnInit {
 
   addCourse(packet: Packet){
 
-    if(this.studentCourses.length == 3){
+    if(this.studentCourses.length == 5){
       window.alert("Course Limit Exceeded");
     }
     else{
@@ -80,6 +94,10 @@ export class CourseListComponent implements OnInit {
         }
       }
       if(temp == 0){
+        let index: number = this.studentCourses.indexOf(packet);
+        if(index != -1){
+          this.packets.splice(index, 1);
+        }
         this.studentCourses.push(packet);
       }  
     }  
@@ -92,7 +110,9 @@ export class CourseListComponent implements OnInit {
     if(index != -1){
       this.studentCourses.splice(index, 1);
     }
+    this.packets.push(packet);
   }
+
   showDetails(packet: Packet){
     this.packetEvent.emit(packet);
   }
@@ -102,6 +122,8 @@ export class CourseListComponent implements OnInit {
       this.courseSaveEvent.emit(this.studentCourses);
     }
   }
+
+
 
   refreshList(): void{
     this.studentCourses = [];

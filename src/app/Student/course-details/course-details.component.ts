@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Packet } from '../packet';
+import { Packet } from '../../Models/packet';
 
 @Component({
   selector: 'app-course-details',

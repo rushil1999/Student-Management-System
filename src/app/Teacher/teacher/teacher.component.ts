@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../course';
+import { Course } from '../../Models/course';
 import { TeacherService } from '../teacher.service';
 import { Router } from '@angular/router';
 
@@ -25,12 +25,14 @@ export class TeacherComponent implements OnInit {
       this.selector = 2;
 
     }
-    else{
-      this.selector = 1;
+    else if(this.array.length>2 && this.array[2] != ""){
+      this.selector = 3;
 
     }
+    else{
+      this.selector = 1;
+    }
     
-//css ma margin left 80% kari de     this.selector = 1;
   }
 
 
@@ -61,8 +63,8 @@ export class TeacherComponent implements OnInit {
   }
 
   signOut(): void{
-    //navigate back to home page
-    localStorage.clear();
+
+      this.router.navigate(["/login"]);
 
   }
 

@@ -1,0 +1,35 @@
+<div>
+    <mat-card>
+        <form [formGroup] = "logInForm">
+            <mat-form-field>
+                <mat-label>Id</mat-label>
+                <input matInput placeholder = "Id" formControlName = "id">
+                <mat-error *ngIf = "(logInForm.get('id').dirty || logInForm.get('id').touched) &&
+                logInForm.get('id').errors?.error">
+                    Must be Numeric
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                    <mat-option *ngFor="let category of categories" [value]="category">
+                        {{ category }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder = "Password" type = "password" formControlName = "password">
+                <mat-error *ngIf = "logInForm.get('password').dirty || logInForm.get('password').touched">
+                    Required
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color = "accent" (click) = "loginUser()">Log In</button>
+            <br>
+            {{message}}
+        </form>
+    </mat-card>
+</div>

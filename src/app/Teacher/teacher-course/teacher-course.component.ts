@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../course';
+import { Course } from '../../Models/course';
 import { TeacherService } from '../teacher.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-course',
@@ -11,7 +12,8 @@ export class TeacherCourseComponent implements OnInit {
 
   courses: Array<Course>;
 
-  constructor( private teacherService: TeacherService ) { }
+  constructor( private teacherService: TeacherService, 
+    private router: Router ) { }
 
   ngOnInit(): void {
     this.teacherService.getCourseList().subscribe(
@@ -26,6 +28,10 @@ export class TeacherCourseComponent implements OnInit {
 
   initializeCourses(data: any): void{
     this.courses = data;
+  }
+
+  goToCourseDetails(course_name: string): void{
+    this.router.navigate(["teacher/",course_name]);
   }
 
 
