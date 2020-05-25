@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sms.course.Packet;
 
@@ -67,6 +68,9 @@ public class StudentService {
 		Student student = studentRepo.findById(student_id).get();
 		return student;
 	}
+	
+	
+	
 	
 	
 }

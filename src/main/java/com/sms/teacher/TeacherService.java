@@ -6,11 +6,16 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sms.studies.StudentCourseService;
+
 @Service
 public class TeacherService {
 
 	@Autowired
 	private TeacherRepository teacherRepo;
+	
+	@Autowired
+	private StudentCourseService studentCourseService;
 	
 	public ArrayList<Teacher> getTeachersList(){
 		
@@ -68,5 +73,12 @@ public class TeacherService {
 	public Teacher getTeacherById(int teacher_id) {
 		
 		return teacherRepo.findById(teacher_id).get();
+	}
+	
+	
+	public ArrayList<StudentGrade> getStudentListForCourse(String name){
+		
+		ArrayList<StudentGrade> list = studentCourseService.getStudentListForCourse(name);
+		return list;
 	}
 }

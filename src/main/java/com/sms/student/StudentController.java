@@ -21,7 +21,7 @@ import com.sms.course.Packet;
 import com.sms.studies.StudentCourseService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 public class StudentController {
 	
 	@Autowired
@@ -42,24 +42,24 @@ public class StudentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getCourseList")
-	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_id") int student_id){
-		
-		ArrayList<Packet> list = courseService.getCourseListForStudent(student_id);
+	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_id") String student_id){
+		System.out.println("WHY here????");
+		ArrayList<Packet> list = courseService.getCourseListForStudent(Integer.parseInt(student_id));
 		return new ResponseEntity<ArrayList<Packet>>(list, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getOptedCourseList")
-	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_id") int student_id){
+	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_id") String student_id){
 		
-		ArrayList<Packet> list = courseService.getOptedCourseListForStudent(student_id);
+		ArrayList<Packet> list = courseService.getOptedCourseListForStudent(Integer.parseInt(student_id));
 		return new ResponseEntity<ArrayList<Packet>>(list, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/saveCourses")
-	public ResponseEntity<String> saveStudentCourses(@RequestBody ArrayList<Packet> list, @RequestHeader("student_id") int student_id) throws JsonProcessingException{
+	public ResponseEntity<String> saveStudentCourses(@RequestBody ArrayList<Packet> list, @RequestHeader("student_id") String student_id) throws JsonProcessingException{
 		
-		String str = studentCourseService.saveStudentCourses(list, student_id);
+		String str = studentCourseService.saveStudentCourses(list, Integer.parseInt(student_id));
 		
 		ObjectMapper map = new ObjectMapper();
 		
@@ -68,6 +68,7 @@ public class StudentController {
 		return new ResponseEntity<String>(str, HttpStatus.OK);
 		
 	}
+	
 	
 	
 	
