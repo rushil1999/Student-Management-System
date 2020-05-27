@@ -40,21 +40,30 @@ export class LogInComponent implements OnInit {
 
     this.loginService.loginUser(username, category, password).subscribe(
       data => {
-        if(data = "OK"){
+        if(!isNaN(data)){
           this.setMessageAndLocalStorage(data, username, category);
         }
         else{
-          this,this.message = data;
+          this.message = data;
+        }
+      },
+      error => {
+        if(error.status == 404 || error.status == 403){
+          this.message = "Invalid Credentials";
+        }  
+        else if(error.status == 500){
+          this.message = "Internal Server Error";
         }
       }
     )
   }
 
   setMessageAndLocalStorage(data: any, username: string, category: string): void{
-    if(data == "OK"){
+    if(!isNaN(data)){
       if(category == "Teacher"){
         localStorage.clear();
         localStorage.setItem("teacher_username", username);
+        localStorage.setItem("teacher_id",data);
         this.router.navigate(["/teacher"]);
       }
       else if(category == "Student"){

@@ -36,7 +36,7 @@ export class CourseAdditionFormComponent implements OnInit {
 
   fetchDetails(): void{
     this.course = this.courseAdditionForm.value;
-    console.log(this.course);    
+    //console.log(this.course);    
     this.courseAdditionEvent.emit(this.course);
 
     this.courseAdditionForm.reset();

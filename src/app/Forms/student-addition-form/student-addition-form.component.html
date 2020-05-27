@@ -70,5 +70,9 @@
             <button mat-raised-button color="accent" [disabled] = "!studentAdditionForm.valid" (click) = "fetchDetails()">Sign Up</button>
             
         </form>
+        {{message}}
+        <br>
+        <br>
+        <button mat-raised-button color = "accent" (click) = "backToLoginPage()">Back To Log In</button>
     </mat-card>
 </div>

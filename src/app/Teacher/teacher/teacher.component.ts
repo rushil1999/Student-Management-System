@@ -20,7 +20,7 @@ export class TeacherComponent implements OnInit {
   ngOnInit(): void {
 
     this.array = this.router.url.split("/", 4);
-    console.log(this.array);
+    //console.log(this.array);
     if(this.array[2] == "addCourse"){
       this.selector = 2;
 
@@ -38,17 +38,17 @@ export class TeacherComponent implements OnInit {
 
 
   getCourseFromChild(course: Course){
-    console.log("Parent received course");
+    //console.log("Parent received course");
     course.accept = false;
     course.id = 1;
     course.teacher_id = Number(localStorage.getItem("teacher_id"));
-    console.log(course);
+    //console.log(course);
     this.teacherService.addCourse(course).subscribe( 
       data => {
         window.alert(data);
       },
       error => {
-        console.log(error);
+        console.log(error.message);
       });
   }
 

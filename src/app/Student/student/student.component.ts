@@ -56,7 +56,7 @@ export class StudentComponent implements OnInit {
       this.studentService.saveStudentCourses(packets).subscribe(
         data => {
           window.alert(data);
-          console.log(this.router.url);
+          //console.log(this.router.url);
           this.router.navigate(["/student"]);
         }, 
         error => {

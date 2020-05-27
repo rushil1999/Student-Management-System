@@ -11,7 +11,7 @@ import { Student } from '../../Models/student';
 })
 export class StudentAdditionFormComponent implements OnInit {
 
-
+  message: string;
   student: Student;
   studentAdditionForm: FormGroup;
 
@@ -51,10 +51,23 @@ export class StudentAdditionFormComponent implements OnInit {
       },
       error => {
         console.log(error);
+        if(error.status == 404){
+          this.message = "Invalid Credentials"
+        }
+        else if(error.status == 403){
+          this.message = "Null Entity";
+        }
+        else if(error.status == 500){
+          this.message = "Internal Server Error";
+        }
       }
 
     )
 
+    //this.router.navigate(["/login"]);
+  }
+
+  backToLoginPage(): void{
     this.router.navigate(["/login"]);
   }
 

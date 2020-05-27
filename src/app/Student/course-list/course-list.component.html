@@ -1,25 +1,33 @@
 <div class = "middlebox">
     <mat-card>
-       
+        <mat-select placeholder = "Sort By Credits" class = "select" (selectionChange) = "filterCoursesByCredits($event.value)" >
+            <mat-option *ngFor="let order of orders" [value]="order">
+                {{ order }}
+            </mat-option>
+        </mat-select>
+        <br><br>
+        <mat-card-title>Courses Offered</mat-card-title>
         <mat-list *ngFor = "let packet of packets">
             <mat-list-item>
                 {{packet.course.name}}
                 <hr>
                 <button mat-raised-button color = "accent" (click) = "addCourse(packet)">Add</button>
+                &nbsp; &nbsp;
                 <button mat-raised-button color = "accent" (click) = "showDetails(packet)">Details</button>
             </mat-list-item>
             
         </mat-list>
         
-        <br>
-        <button mat-raised-button color = "accent" (click) = "filterCoursesByCredits()">Sort By Credits</button>
+        
+
         <br><br><br>
-        <mat-card-title>Selected</mat-card-title>
+        <mat-card-title>Your Courses</mat-card-title>
         <mat-list *ngFor = "let packet of studentCourses">
             <mat-list-item>
                 {{packet.course.name}}
                 <hr>
                 <button mat-raised-button color = "accent" (click) = "dropCourse(packet)">Drop</button>
+                &nbsp; &nbsp;
                 <button mat-raised-button color = "accent" (click) = "showDetails(packet)">Details</button>
             </mat-list-item>
         </mat-list>

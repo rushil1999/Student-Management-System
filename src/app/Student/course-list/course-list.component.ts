@@ -23,6 +23,8 @@ export class CourseListComponent implements OnInit {
 
   navigationSubscription: any;
 
+  orders: string[] = ["Ascending", "Descending"];
+
   constructor( private studentService: StudentService,
     private route: Router ) { 
 
@@ -124,10 +126,21 @@ export class CourseListComponent implements OnInit {
     if(this.studentCourses.length > 0){
       this.courseSaveEvent.emit(this.studentCourses);
     }
+    else{
+      window.alert("Opt for atleast One course");
+    }
   }
 
-  filterCoursesByCredits(): void{
-    this.packets.sort((b,a) => (a.course.credits - b.course.credits));
+  filterCoursesByCredits(value: any): void{
+    console.log(value);
+    if(value == "Descending"){
+      this.packets.sort((b,a) => (a.course.credits - b.course.credits));
+      this.studentCourses.sort((b,a) => (a.course.credits - b.course.credits));
+    }
+    else{
+      this.packets.sort((b,a) => (b.course.credits - a.course.credits));
+      this.studentCourses.sort((b,a) => (b.course.credits - a.course.credits));
+    }  
   }
 
 

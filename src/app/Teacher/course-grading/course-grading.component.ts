@@ -15,6 +15,8 @@ export class CourseGradingComponent implements OnInit {
 
   grades: string[] = ["A+", "A", "A-", "B+", "B-", "B", "C", "F", null];
 
+  orders: string[] = ["Ascending", "Descending"];
+
 
   students: Array<StudentGrade>;
   constructor( private router: Router,
@@ -63,8 +65,22 @@ export class CourseGradingComponent implements OnInit {
   }
 
   
-  sortStudentsByName(): void{
-    this.students.sort((a,b) => (a > b ? -1 : 1));
+  sortStudentsByName(value: any): void{
+    if(value == "Ascending"){
+      this.students.sort((a,b) => (a.student.fname > b.student.fname ? -1 : 1));
+    }
+    else{
+      this.students.sort((a,b) => (b.student.fname > a.student.fname ? -1 : 1));
+    } 
+  }
+
+  sortStudentsByGrade(value: any): void{
+    if(value == "Ascending"){
+      this.students.sort((a,b) => (b.grade > a.grade? -1 : 1));
+    }
+    else{
+      this.students.sort((a,b) => (a.grade > b.grade ? -1 : 1));
+    }
   }
         
 }

@@ -1,15 +1,25 @@
 <div class = "middlebox">
     <mat-card>
+        <mat-select placeholder = "Sort By Name" class = "select" (selectionChange) = "sortStudentsByName($event.value)" >
+            <mat-option *ngFor="let order of orders" [value]="order">
+                {{ order }}
+            </mat-option>
+        </mat-select> 
+        &nbsp; &nbsp;
+        <mat-select placeholder = "Sort By Grades" class = "select" (selectionChange) = "sortStudentsByGrade($event.value)" >
+            <mat-option *ngFor="let order of orders" [value]="order">
+                {{ order }}
+            </mat-option>
+        </mat-select> 
+        <br><br>
         <mat-list *ngFor = "let student of students">
             <mat-list-item>
                 {{student.student.id}} &nbsp;
                 {{student.student.fname}} {{student.student.lname}} &nbsp;
                 {{student.student.program}} &nbsp;
                 {{student.student.semester}}  &nbsp;
-                &nbsp; &nbsp;
-
-                
-                <mat-select class = "select"  [(ngModel)] = 'student.grade'>
+                <hr>
+                <mat-select placeholder = "Grade" class = "grading"  [(ngModel)] = 'student.grade'>
                     <mat-option *ngFor="let grade of grades" [value] = "grade" >
                         {{ grade }}
                     </mat-option>
@@ -19,8 +29,5 @@
         </mat-list>
         <button mat-raised-button color = "accent" (click) = "saveGrades()" *ngIf = "students?.length > 0">Save</button>
         <p *ngIf = "students?.length == 0">No students opted for this course</p> 
-        <br>
-        <br>
-        <button mat-raised-button color = "accent" (click) = "sortStudentsByName()" *ngIf = "students?.length > 0">Sort By Name</button>
     </mat-card>
 </div>
