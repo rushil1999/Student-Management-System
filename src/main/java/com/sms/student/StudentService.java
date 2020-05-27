@@ -78,14 +78,14 @@ public class StudentService {
 		return student;
 	}
 	
-	public int getStudentIdByUsername(String student_username) {
+	public int getStudentIdByUsername(String student_username) throws CustomException {
 		
 		if(this.checkIfUsernameExists(student_username)) {
 			Student student = studentRepo.getStudentIdByUsername(student_username).get(0);
 			return student.getId();
 		}
 		else {
-			return -1;
+			throw new CustomException("Student Does Not Exist");
 		}
 		
 		
@@ -114,10 +114,8 @@ public class StudentService {
 	
 	public boolean validateStudent(Student student) throws CustomException {
 		
-		int temp = 0;
 		if(student.getUsername() == null || student.getFname() == null || student.getLname() == null || 
 				student.getEmailaddr() == null || student.getProgram() == null || student.getSemester() == 0 || student.getPassword() == null) {
-			temp = 1;
 			throw new CustomException("Null Entity");
 		}
 		else {

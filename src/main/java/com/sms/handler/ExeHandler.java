@@ -14,10 +14,17 @@ public class ExeHandler {
 	@ExceptionHandler(CustomException.class)
 	public ResponseEntity<?> handleException(CustomException c) throws JsonProcessingException{
 		
+		HttpStatus status = null;
 		String str = c.getMessage();
+		if(str.equals("Null Entity")) {
+			status = HttpStatus.FORBIDDEN;
+		}
+		else {
+			status = HttpStatus.NOT_FOUND;
+		}
 		ObjectMapper map = new ObjectMapper();
 		str = map.writeValueAsString(str);
-		return new ResponseEntity<String>(str, HttpStatus.FORBIDDEN);
+		return new ResponseEntity<String>(str, status);
 		
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sms.handler.CustomException;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -22,7 +23,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/login")
 	public ResponseEntity<String> logIn(@RequestParam(name = "username") String username, @RequestParam(name = "category") String type, 
-			@RequestParam(name = "password") String password) throws JsonProcessingException{
+			@RequestParam(name = "password") String password) throws JsonProcessingException, CustomException{
 		
 		//System.out.println("Login Controller");
 		String str = loginService.logIn(username, type, password);

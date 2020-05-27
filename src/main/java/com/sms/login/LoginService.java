@@ -3,6 +3,7 @@ package com.sms.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sms.handler.CustomException;
 import com.sms.student.Student;
 import com.sms.student.StudentRepository;
 import com.sms.student.StudentService;
@@ -26,7 +27,7 @@ public class LoginService {
 	@Autowired
 	private StudentService studentService;
 	
-	public String logIn(String username, String type, String password) {
+	public String logIn(String username, String type, String password) throws CustomException {
 		
 		//System.out.println("Login Service");
 		
@@ -41,7 +42,7 @@ public class LoginService {
 			if(teacherRepository.existsById(id)) {
 				teacher = teacherRepository.findById(id).get();
 				if(teacher.getPassword().equals(password)) {
-					return "OK";
+					return Integer.toString(teacher.getId());
 				}
 				else {
 					return "Wrong Password";
@@ -61,7 +62,7 @@ public class LoginService {
 				student = studentRepository.findById(id).get();
 				//System.out.println("Here2");
 				if(student.getPassword().equals(password)) {
-					return "OK";
+					return Integer.toString(student.getId());
 				}
 				else {
 					return "Wrong Password";

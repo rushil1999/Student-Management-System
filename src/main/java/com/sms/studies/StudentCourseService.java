@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sms.course.Course;
 import com.sms.course.CourseService;
 import com.sms.course.Packet;
+import com.sms.handler.CustomException;
 import com.sms.student.Student;
 import com.sms.student.StudentService;
 import com.sms.teacher.StudentGrade;
@@ -70,10 +71,15 @@ public class StudentCourseService {
 	
 	
 	
-	public String saveStudentCourses(ArrayList<Packet> list, int student_id) {
+	public String saveStudentCourses(ArrayList<Packet> list, String student_username) throws CustomException {
 		 
-		int i,j;
+		int i,j, student_id;
 		StudentCourse studentCourse = null;
+
+		studentService.checkIfUsernameExists(student_username);
+		student_id = studentService.getStudentIdByUsername(student_username);
+	
+
 		
 		ArrayList<StudentCourse> origList = studentCourseRepo.getCourseListForStudent(student_id);
 		
@@ -145,9 +151,11 @@ public class StudentCourseService {
 	public String saveStudentsGrades(ArrayList<StudentGrade> list, String course_name) {
 		
 		StudentCourse studentCourse = null;
+		
+		
+		
 		int i, course_id = courseService.getCourseByName(course_name).getId();
 		int student_id;
-		String grade;
 		for(i=0;i<list.size();i++) {
 			
 			student_id = list.get(i).getStudent().getId();

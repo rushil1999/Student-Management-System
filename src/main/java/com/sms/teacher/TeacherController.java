@@ -60,7 +60,7 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getCoursesTeacher")
-	public ResponseEntity<ArrayList<Course>> getCourseListForTeacher(@RequestParam(name = "teacher_username") String teacher_username ){
+	public ResponseEntity<ArrayList<Course>> getCourseListForTeacher(@RequestParam(name = "teacher_username") String teacher_username ) throws CustomException{
 		
 		//System.out.println("Teacher Why Here");
 		ArrayList<Course> list = courseService.getCourseListForTeacher(teacher_username);

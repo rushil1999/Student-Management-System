@@ -48,7 +48,7 @@ public class CourseService {
 		course.setId(this.getLatestId());
 		//course.printDetails();
 		
-		if(this.validateCourse(course) && this.checkIfCourseExists(course)) {
+		if(this.validateCourse(course) && this.checkIfCourseExists(course.getName())) {
 			courseRepo.save(course);
 			return "Course Added!";
 		}
@@ -60,11 +60,11 @@ public class CourseService {
 	
 	
 	
-	public boolean checkIfCourseExists(Course course) {
+	public boolean checkIfCourseExists(String course_name) {
 		ArrayList<Course> list = this.getCourseList();
 		int i; 
 		for(i=0;i<list.size();i++) {
-			if(course.getName().equals(list.get(i).getName())) {
+			if(course_name.equals(list.get(i).getName())) {
 				return false;
 			}
 		}
@@ -109,7 +109,7 @@ public class CourseService {
 	}
 	
 	
-	public ArrayList<Course> getCourseListForTeacher(String teacher_username){
+	public ArrayList<Course> getCourseListForTeacher(String teacher_username) throws CustomException{
 		
 		int teacher_id = teacherService.getTeacherIdByUsername(teacher_username);
 		
@@ -118,7 +118,7 @@ public class CourseService {
 	}
 	
 	
-	public ArrayList<Packet> getCourseListForStudent(String student_username){
+	public ArrayList<Packet> getCourseListForStudent(String student_username) throws CustomException{
 		
 		int student_id = studentService.getStudentIdByUsername(student_username);
 		
@@ -142,7 +142,7 @@ public class CourseService {
 		return list;
 	}
 	
-	public ArrayList<Packet> getOptedCourseListForStudent(String student_username){
+	public ArrayList<Packet> getOptedCourseListForStudent(String student_username) throws CustomException{
 		
 		int student_id = studentService.getStudentIdByUsername(student_username);
 		

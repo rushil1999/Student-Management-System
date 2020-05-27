@@ -45,7 +45,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getCourseList")
-	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_username") String student_username){
+	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_username") String student_username) throws CustomException{
 		//System.out.println("WHY here???? " + student_id);
 		
 		ArrayList<Packet> list = courseService.getCourseListForStudent(student_username);
@@ -54,16 +54,16 @@ public class StudentController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getOptedCourseList")
-	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_username") String student_username){
+	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_username") String student_username) throws CustomException{
 		
 		ArrayList<Packet> list = courseService.getOptedCourseListForStudent(student_username);
 		return new ResponseEntity<ArrayList<Packet>>(list, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/saveCourses")
-	public ResponseEntity<String> saveStudentCourses(@RequestBody ArrayList<Packet> list, @RequestHeader("student_id") String student_id) throws JsonProcessingException{
+	public ResponseEntity<String> saveStudentCourses(@RequestBody ArrayList<Packet> list, @RequestHeader("student_username") String student_username) throws JsonProcessingException, CustomException{
 		
-		String str = studentCourseService.saveStudentCourses(list, Integer.parseInt(student_id));
+		String str = studentCourseService.saveStudentCourses(list, student_username);
 		
 		ObjectMapper map = new ObjectMapper();
 		

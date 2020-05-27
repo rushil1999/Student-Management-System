@@ -89,14 +89,14 @@ public class TeacherService {
 		return list;
 	}
 	
-	public int getTeacherIdByUsername(String teacher_username) {
+	public int getTeacherIdByUsername(String teacher_username) throws CustomException {
 		
-		if(!this.checkIfUsernameExists(teacher_username)) {
+		if(this.checkIfUsernameExists(teacher_username)) {
 			Teacher teacher = teacherRepo.getTeacherIdByUsername(teacher_username).get(0);
 			return teacher.getId();
 		}
 		else {
-			return -1;
+			throw new CustomException("Teacher Does Not exist");
 		}
 		
 		
@@ -108,6 +108,7 @@ public class TeacherService {
 		ArrayList<Teacher> list = this.getTeachersList();
 		int i, temp = 0;
 		for(i=0;i<list.size();i++) {
+			//System.out.println(list.get(i).getUsername() + " " + teacher_username);
 			if(list.get(i).getUsername().equals(teacher_username)){
 				temp = 1;
 				break;
