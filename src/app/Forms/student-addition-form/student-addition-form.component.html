@@ -1,0 +1,74 @@
+
+
+<div class = "middlebox">
+    
+    <mat-card >
+        <mat-card-title>Sign Up</mat-card-title>
+        <form [formGroup] = "studentAdditionForm">
+            <mat-form-field >
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder = "User Name"  formControlName = "username">
+                <mat-error *ngIf = "studentAdditionForm.get('username').errors?.maxlength && 
+                (studentAdditionForm.get('username').dirty || studentAdditionForm.get('username').touched) ">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder = "First Name"  formControlName = "fname">
+                <mat-error *ngIf = "studentAdditionForm.get('fname').errors?.maxlength && 
+                (studentAdditionForm.get('fname').dirty || studentAdditionForm.get('fname').touched) ">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder = "Last Name"  formControlName = "lname">
+                <mat-error *ngIf = "studentAdditionForm.get('lname').errors?.maxlength && 
+                studentAdditionForm.get('lname').touched">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Email Address</mat-label>
+                <input matInput placeholder = "Email"  formControlName = "emailaddr">
+                <mat-error *ngIf = "studentAdditionForm.get('emailaddr').errors?.email">
+                    Invalid Email
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Program</mat-label>
+                <mat-select formControlName="program">
+                    <mat-option *ngFor="let program of programs" [value]="program">
+                        {{ program }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Semester</mat-label>
+                <mat-select formControlName="semester">
+                    <mat-option *ngFor="let semester of semesters" [value]="semester">
+                        {{ semester }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput  placeholder = "Password" type = "password" formControlName = "password">
+                <mat-error *ngIf = "studentAdditionForm.get('password').errors?.maxlength && studentAdditionForm.get('password').touched">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="accent" [disabled] = "!studentAdditionForm.valid" (click) = "fetchDetails()">Sign Up</button>
+            
+        </form>
+    </mat-card>
+</div>

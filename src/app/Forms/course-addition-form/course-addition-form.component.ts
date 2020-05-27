@@ -17,7 +17,7 @@ export class CourseAdditionFormComponent implements OnInit {
 
   course: Course;
 
-  credits: number[] = [1, 1.5, 2, 2.5, 3];
+  credits: number[] = [1, 2, 3, 4, 5];
 
   constructor() { }
 

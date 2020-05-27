@@ -1,6 +1,7 @@
 export class Student{
     
     id: number;
+    username: string;
     fname: string;
     lname: string;
     emailaddr: string;

@@ -18,7 +18,7 @@ export class StudentService {
   constructor( private http: HttpClient ) { }
 
   getCourseList(temp:boolean): Observable<any>{
-
+    //console.log("Student Service called");
     let url: string;
     
     if(temp == true){
@@ -28,11 +28,11 @@ export class StudentService {
       url = this.url_getOptedCourses;
     }
 
-    let val: any = localStorage.getItem("student_id");
+    let val: any = localStorage.getItem("student_username");
 
     let parameters = {
       params: {
-        "student_id": val
+        "student_username": val
       } 
     };
     return this.http.get<Array<Packet>>(url, parameters);
@@ -46,7 +46,7 @@ export class StudentService {
     let parameters = {
 
       headers: new HttpHeaders({
-        "student_id": localStorage.getItem("student_id")
+        "student_username": localStorage.getItem("student_username")
       })
     };
 

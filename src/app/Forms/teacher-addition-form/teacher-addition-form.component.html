@@ -1,0 +1,66 @@
+
+
+<div class = "middlebox">
+    
+    <mat-card >
+        <mat-card-title>Sign Up</mat-card-title>
+        <form [formGroup] = "teacherAddtionForm">
+            <mat-form-field >
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder = "User Name"  formControlName = "username">
+                <mat-error *ngIf = "teacherAddtionForm.get('username').errors?.maxlength && 
+                (teacherAddtionForm.get('username').dirty || teacherAddtionForm.get('username').touched) ">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field >
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder = "First Name"  formControlName = "fname">
+                <mat-error *ngIf = "teacherAddtionForm.get('fname').errors?.maxlength && 
+                (teacherAddtionForm.get('fname').dirty || teacherAddtionForm.get('fname').touched) ">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder = "Last Name"  formControlName = "lname">
+                <mat-error *ngIf = "teacherAddtionForm.get('lname').errors?.maxlength && 
+                teacherAddtionForm.get('lname').touched">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Email Address</mat-label>
+                <input matInput placeholder = "Email"  formControlName = "emailaddr">
+                <mat-error *ngIf = "teacherAddtionForm.get('emailaddr').errors?.email">
+                    Invalid Email
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Qualifications</mat-label>
+                <input matInput placeholder = "Qualifications"  formControlName = "qualifications">
+                <mat-error *ngIf = "teacherAddtionForm.get('qualifications').errors?.maxlength && teacherAddtionForm.get('qualifications').touched">
+                    Character limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput  placeholder = "Password" type = "password" formControlName = "password">
+                <mat-error *ngIf = "teacherAddtionForm.get('password').errors?.maxlength && teacherAddtionForm.get('password').touched">
+                    Character Limit Exceeded
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="accent" [disabled] = "!teacherAddtionForm.valid" (click) = "fetchDetails()">Sign Up</button>
+            
+        </form>
+
+
+    </mat-card>
+</div>

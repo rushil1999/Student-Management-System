@@ -17,6 +17,10 @@
                 
             </mat-list-item>
         </mat-list>
-        <button mat-raised-button color = "accent" (click) = "saveGrades()">Save</button>
+        <button mat-raised-button color = "accent" (click) = "saveGrades()" *ngIf = "students?.length > 0">Save</button>
+        <p *ngIf = "students?.length == 0">No students opted for this course</p> 
+        <br>
+        <br>
+        <button mat-raised-button color = "accent" (click) = "sortStudentsByName()" *ngIf = "students?.length > 0">Sort By Name</button>
     </mat-card>
 </div>

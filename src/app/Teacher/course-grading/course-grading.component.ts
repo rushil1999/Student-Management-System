@@ -15,6 +15,7 @@ export class CourseGradingComponent implements OnInit {
 
   grades: string[] = ["A+", "A", "A-", "B+", "B-", "B", "C", "F", null];
 
+
   students: Array<StudentGrade>;
   constructor( private router: Router,
     private teacherService: TeacherService ) { }
@@ -46,6 +47,7 @@ export class CourseGradingComponent implements OnInit {
 
   initializeStudentList(data: any): void{
     this.students = data;
+
   }
 
   saveGrades(): void{
@@ -60,5 +62,9 @@ export class CourseGradingComponent implements OnInit {
     );
   }
 
-
+  
+  sortStudentsByName(): void{
+    this.students.sort((a,b) => (a > b ? -1 : 1));
+  }
+        
 }

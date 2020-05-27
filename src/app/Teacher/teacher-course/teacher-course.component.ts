@@ -34,7 +34,9 @@ export class TeacherCourseComponent implements OnInit {
     this.router.navigate(["teacher/",course_name]);
   }
 
-
+  sortCoursesByCredits(): void{
+    this.courses.sort((a,b) => (a.credits-b.credits));
+  }
 
 
 }

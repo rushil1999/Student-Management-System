@@ -1,11 +1,12 @@
-<div>
+<div class = "middlebox">
     <mat-card>
+        <mat-card-title>Log In</mat-card-title>
         <form [formGroup] = "logInForm">
             <mat-form-field>
-                <mat-label>Id</mat-label>
-                <input matInput placeholder = "Id" formControlName = "id">
-                <mat-error *ngIf = "(logInForm.get('id').dirty || logInForm.get('id').touched) &&
-                logInForm.get('id').errors?.error">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder = "Username" formControlName = "username">
+                <mat-error *ngIf = "(logInForm.get('username').dirty || logInForm.get('username').touched) &&
+                logInForm.get('username').errors?.error">
                     Must be Numeric
                 </mat-error>
             </mat-form-field>
@@ -31,5 +32,9 @@
             <br>
             {{message}}
         </form>
+        <br>
+        <button mat-raised-button color = "accent" (click) = "RegisterAsTeacher()">Register As Teacher</button>
+        &nbsp; &nbsp;
+        <button mat-raised-button color = "accent" (click) = "RegisterAsStudent()">Register As Student</button>
     </mat-card>
 </div>

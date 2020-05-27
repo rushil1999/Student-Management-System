@@ -17,6 +17,8 @@ import { CourseDetailsComponent } from './Student/course-details/course-details.
 import { CourseGradingComponent } from './Teacher/course-grading/course-grading.component';
 import { AdminComponent } from './Admin/admin/admin.component';
 import { LogInComponent } from './Forms/log-in/log-in.component';
+import { TeacherAdditionFormComponent } from './Forms/teacher-addition-form/teacher-addition-form.component';
+import { StudentAdditionFormComponent } from './Forms/student-addition-form/student-addition-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { LogInComponent } from './Forms/log-in/log-in.component';
     CourseDetailsComponent,
     CourseGradingComponent,
     AdminComponent,
-    LogInComponent
+    LogInComponent,
+    TeacherAdditionFormComponent,
+    StudentAdditionFormComponent
   ],
   imports: [
     BrowserModule,

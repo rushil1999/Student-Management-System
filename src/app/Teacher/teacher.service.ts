@@ -36,7 +36,7 @@ export class TeacherService {
 
     let parameters = {
       params: {
-        "teacher_id": localStorage.getItem("teacher_id") 
+        "teacher_username": localStorage.getItem("teacher_username") 
       }
     }
 

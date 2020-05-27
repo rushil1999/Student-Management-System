@@ -1,5 +1,6 @@
 export class Teacher{
     id: number;
+    username: string;
     fname: string;
     lname: string;
     emailaddr: string;

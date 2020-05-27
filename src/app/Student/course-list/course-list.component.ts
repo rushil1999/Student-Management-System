@@ -26,17 +26,18 @@ export class CourseListComponent implements OnInit {
   constructor( private studentService: StudentService,
     private route: Router ) { 
 
-    this.navigationSubscription = this.route.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        //console.log(" Child Re-initialised");
-        this.ngOnInit();
-      }
-    });
+    // this.navigationSubscription = this.route.events.subscribe((e: any) => {
+    //   // If it is a NavigationEnd event re-initalise the component
+    //   if (e instanceof NavigationEnd) {
+    //     //console.log(" Child Re-initialised");
+    //     this.ngOnInit();
+    //   }
+    // });
 
   }
 
   ngOnInit(): void {
+    //console.log("Ng Function called");
     this.getOptedCourseList();
     this.getCourseList();
   }
@@ -93,14 +94,16 @@ export class CourseListComponent implements OnInit {
           temp = 1;
         }
       }
-      if(temp == 0){
-        let index: number = this.studentCourses.indexOf(packet);
-        if(index != -1){
-          this.packets.splice(index, 1);
-        }
-        this.studentCourses.push(packet);
-      }  
+    if(temp == 0){
+      let index: number = this.packets.indexOf(packet);
+      
+      if(index != -1){
+        console.log("Course Added "+ packet);
+        this.packets.splice(index, 1);
+      }
+      this.studentCourses.push(packet);
     }  
+  }  
 
   }
 
@@ -123,12 +126,11 @@ export class CourseListComponent implements OnInit {
     }
   }
 
-
-
-  refreshList(): void{
-    this.studentCourses = [];
-
+  filterCoursesByCredits(): void{
+    this.packets.sort((b,a) => (a.course.credits - b.course.credits));
   }
+
+
 
 
 }
