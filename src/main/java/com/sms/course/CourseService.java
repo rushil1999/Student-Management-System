@@ -6,10 +6,11 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sms.handler.CustomException;
+import com.sms.student.StudentService;
 import com.sms.studies.StudentCourseService;
 import com.sms.teacher.Teacher;
 import com.sms.teacher.TeacherService;
-import com.sms.teaching.TeacherCourseService;
 
 
 
@@ -24,6 +25,9 @@ public class CourseService {
 	
 	@Autowired
 	private StudentCourseService studentCourseService;
+	
+	@Autowired 
+	private StudentService studentService;
 
 	
 	public int  temp = 5;
@@ -39,12 +43,12 @@ public class CourseService {
 		return list;
 	}
 	
-	public String addCourse(Course course) {
+	public String addCourse(Course course) throws CustomException {
 		
 		course.setId(this.getLatestId());
 		//course.printDetails();
 		
-		if(this.validateCourse(course)) {
+		if(this.validateCourse(course) && this.checkIfCourseExists(course)) {
 			courseRepo.save(course);
 			return "Course Added!";
 		}
@@ -56,7 +60,7 @@ public class CourseService {
 	
 	
 	
-	public boolean validateCourse(Course course) {
+	public boolean checkIfCourseExists(Course course) {
 		ArrayList<Course> list = this.getCourseList();
 		int i; 
 		for(i=0;i<list.size();i++) {
@@ -105,14 +109,18 @@ public class CourseService {
 	}
 	
 	
-	public ArrayList<Course> getCourseListForTeacher(int teacher_id){
+	public ArrayList<Course> getCourseListForTeacher(String teacher_username){
+		
+		int teacher_id = teacherService.getTeacherIdByUsername(teacher_username);
 		
 		ArrayList<Course> list = courseRepo.findCoursesByTeacher_id(teacher_id);
 		return list;
 	}
 	
 	
-	public ArrayList<Packet> getCourseListForStudent(int student_id){
+	public ArrayList<Packet> getCourseListForStudent(String student_username){
+		
+		int student_id = studentService.getStudentIdByUsername(student_username);
 		
 		ArrayList<Packet> list = new ArrayList<Packet>();
 		ArrayList<Course> tempList1, tempList2 = null;
@@ -121,7 +129,7 @@ public class CourseService {
 		tempList2 = studentCourseService.getCourseListForStudent(student_id);
 		
 		tempList1.removeAll(tempList2);
-		int i,j;
+		int i;
 		Packet packet = null;
 		Teacher teacher = null;
 		for(i=0;i<tempList1.size();i++) {
@@ -134,7 +142,9 @@ public class CourseService {
 		return list;
 	}
 	
-	public ArrayList<Packet> getOptedCourseListForStudent(int student_id){
+	public ArrayList<Packet> getOptedCourseListForStudent(String student_username){
+		
+		int student_id = studentService.getStudentIdByUsername(student_username);
 		
 		ArrayList<Packet> list = new ArrayList<Packet>();
 		ArrayList<Course> tempList = studentCourseService.getCourseListForStudent(student_id);
@@ -150,5 +160,19 @@ public class CourseService {
 			list.add(packet);
 		}
 		return list;
+	}
+	
+	
+	public boolean validateCourse(Course course) throws CustomException {
+		if(course.getName() == null || course.getOutline() == null || course.getCapacity() <=0 || course.getTeacher_id() <=0) {
+			
+			throw new CustomException("Null Entity");
+		}
+		else if(course.getCredits() < 1 || course.getCredits() > 5) {
+			throw new CustomException("Invalid Credits");
+		}
+		else {
+			return true;
+		}
 	}
 }

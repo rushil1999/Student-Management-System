@@ -17,8 +17,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.course.Course;
 import com.sms.course.CourseService;
+import com.sms.handler.CustomException;
 import com.sms.studies.StudentCourseService;
-import com.sms.teaching.TeacherCourseService;
 
 @RestController
 @CrossOrigin("*")
@@ -36,17 +36,20 @@ public class TeacherController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/addTeacher")
-	public ResponseEntity<Boolean> addTeacher(@RequestBody Teacher teacher) {
+	public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher) throws JsonProcessingException {
 		
 		//System.out.println("Controller");
 		//teacher.printDetails();
 		
-		boolean val = teacherService.addTeacher(teacher);
-		return new ResponseEntity<Boolean>(val, HttpStatus.OK);
+		String str = teacherService.addTeacher(teacher);
+		
+		ObjectMapper map = new ObjectMapper();
+		str = map.writeValueAsString(str);
+		return new ResponseEntity<String>(str, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/addCourse")
-	public ResponseEntity<String> addCourse(@RequestBody Course course) throws JsonProcessingException{
+	public ResponseEntity<String> addCourse(@RequestBody Course course) throws JsonProcessingException, CustomException{
 		
 		ObjectMapper map = new ObjectMapper();
 		
@@ -57,10 +60,10 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getCoursesTeacher")
-	public ResponseEntity<ArrayList<Course>> getCourseListForTeacher(@RequestParam(name = "teacher_id") String teacher_id ){
+	public ResponseEntity<ArrayList<Course>> getCourseListForTeacher(@RequestParam(name = "teacher_username") String teacher_username ){
 		
-		System.out.println("Teacher Why Here");
-		ArrayList<Course> list = courseService.getCourseListForTeacher(Integer.parseInt(teacher_id));
+		//System.out.println("Teacher Why Here");
+		ArrayList<Course> list = courseService.getCourseListForTeacher(teacher_username);
 		
 		return new ResponseEntity<ArrayList<Course>>(list, HttpStatus.OK);		
 	}

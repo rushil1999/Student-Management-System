@@ -21,9 +21,13 @@ public class LoginController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/login")
-	public ResponseEntity<String> logIn(@RequestParam(name = "id") String id, @RequestParam(name = "category") String type, 
+	public ResponseEntity<String> logIn(@RequestParam(name = "username") String username, @RequestParam(name = "category") String type, 
 			@RequestParam(name = "password") String password) throws JsonProcessingException{
-		String str = loginService.logIn(Integer.parseInt(id), type, password);
+		
+		//System.out.println("Login Controller");
+		String str = loginService.logIn(username, type, password);
+		
+		
 		
 		ObjectMapper map = new ObjectMapper();
 		

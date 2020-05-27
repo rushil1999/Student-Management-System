@@ -17,9 +17,9 @@ public class Student extends Role{
 	private int semester;
 
 	
-	public Student(int id, String fname, String lname, String emailaddr, String password, 
-			boolean accept, String program, int semester ) {
-		super(id, fname, lname, emailaddr, password, accept);
+	public Student(int id, String username, String fname, String lname, String emailaddr, String password, 
+			boolean accept, String program, int semester  ) {
+		super(id, fname, lname, emailaddr, password, username, accept);
 		this.program = program;
 		this.semester = semester;
 		
@@ -47,6 +47,7 @@ public class Student extends Role{
 	
 	public void printDetails() {
 		System.out.println("Id: " + this.getId());
+		System.out.println("Username " + this.getUsername());
 		System.out.println("First Name: " + this.getFname());
 		System.out.println("Last Name: " + this.getLname());
 		System.out.println("Email Address: " + this.getEmailaddr());

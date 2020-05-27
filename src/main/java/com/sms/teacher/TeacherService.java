@@ -6,6 +6,7 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sms.handler.CustomException;
 import com.sms.studies.StudentCourseService;
 
 @Service
@@ -30,16 +31,22 @@ public class TeacherService {
 	}
 	
 	
-	public boolean addTeacher(Teacher teacher) {
+	public String addTeacher(Teacher teacher) {
 		
-		System.out.println("Service");
+		if(!this.checkIfUsernameExists(teacher.getUsername())){
+			int val =  this.latestId();
+			teacher.setId(val);
+			//teacher.printDetails();
+			
+			
+			teacherRepo.save(teacher);
+			return "Added Successfully";
+		}
+		else {
+			return "User Name Exists";
+		}
 		
-		teacher.setId(this.latestId());
-		//teacher.printDetails();
 		
-		
-		teacherRepo.save(teacher);
-		return true;
 	}
 	
 	
@@ -80,5 +87,49 @@ public class TeacherService {
 		
 		ArrayList<StudentGrade> list = studentCourseService.getStudentListForCourse(name);
 		return list;
+	}
+	
+	public int getTeacherIdByUsername(String teacher_username) {
+		
+		if(!this.checkIfUsernameExists(teacher_username)) {
+			Teacher teacher = teacherRepo.getTeacherIdByUsername(teacher_username).get(0);
+			return teacher.getId();
+		}
+		else {
+			return -1;
+		}
+		
+		
+		
+	}
+	
+	
+	public boolean checkIfUsernameExists(String teacher_username) {
+		ArrayList<Teacher> list = this.getTeachersList();
+		int i, temp = 0;
+		for(i=0;i<list.size();i++) {
+			if(list.get(i).getUsername().equals(teacher_username)){
+				temp = 1;
+				break;
+			}
+		}
+		if(temp == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public boolean validateTeacher(Teacher teacher) throws CustomException {
+			
+		if(teacher.getUsername() == null || teacher.getFname() == null || teacher.getLname() == null || 
+				teacher.getEmailaddr() == null || teacher.getQualifications() == null || teacher.getPassword() == null) {
+			throw new CustomException("Null Entity");
+		}
+		else {
+			return true;
+		}
+		
 	}
 }

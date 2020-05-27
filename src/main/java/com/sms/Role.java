@@ -12,6 +12,9 @@ public class Role {
 	private int id;
 	
 	@NotNull
+	private String username;
+	
+	@NotNull
 	private String fname;
 	
 	@NotNull
@@ -27,13 +30,14 @@ public class Role {
 	private boolean accept;
 
 	
-	public Role(int id, String fname, String lname, String emailaddr, String password, boolean accept) {
+	public Role(int id, String fname, String lname, String emailaddr, String password, String username, boolean accept) {
 		super();
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
 		this.emailaddr = emailaddr;
 		this.password = password;
+		this.username = username;
 		this.accept = accept;
 	}
 	
@@ -100,6 +104,16 @@ public class Role {
 	public void setAccept(boolean accept) {
 		this.accept = accept;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
 	
 	
 	

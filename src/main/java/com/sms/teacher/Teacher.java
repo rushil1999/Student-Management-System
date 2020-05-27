@@ -13,9 +13,9 @@ public class Teacher extends Role{
 	@Column(name = "qualifications", nullable = false)
 	private String qualifications;
 	
-	public Teacher(int id, String fname, String lname, String emailaddr, String password, 
+	public Teacher(int id, String username, String fname, String lname, String emailaddr, String password, 
 			boolean accept, String qualifications) {
-		super(id, fname, lname, emailaddr, password, accept);
+		super(id, fname, lname, emailaddr, password, username, accept);
 		this.qualifications = qualifications;
 		
 	}
@@ -36,6 +36,7 @@ public class Teacher extends Role{
 	
 	public void printDetails() {
 		System.out.println("Id: " + this.getId());
+		System.out.println("Username " + this.getUsername());
 		System.out.println("First Name: " + this.getFname());
 		System.out.println("Last Name: " + this.getLname());
 		System.out.println("Email Address: " + this.getEmailaddr());

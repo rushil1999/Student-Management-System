@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sms.course.Course;
 import com.sms.course.CourseService;
 import com.sms.course.Packet;
+import com.sms.handler.CustomException;
 import com.sms.studies.StudentCourseService;
 
 @RestController
@@ -34,25 +34,29 @@ public class StudentController {
 	private StudentCourseService studentCourseService;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/addStudent")
-	public ResponseEntity<Boolean> addStudent(@RequestBody Student student) {
+	public ResponseEntity<String> addStudent(@RequestBody Student student) throws JsonProcessingException, CustomException {
 		
-		boolean val = studentService.addStudent(student);
+		String str = studentService.addStudent(student);
 		
-		return new ResponseEntity<Boolean>(val, HttpStatus.OK);
+		ObjectMapper map = new ObjectMapper();
+		str = map.writeValueAsString(str);
+		
+		return new ResponseEntity<String>(str, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getCourseList")
-	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_id") String student_id){
-		System.out.println("WHY here????");
-		ArrayList<Packet> list = courseService.getCourseListForStudent(Integer.parseInt(student_id));
+	public ResponseEntity<ArrayList<Packet>> getCourseList(@RequestParam("student_username") String student_username){
+		//System.out.println("WHY here???? " + student_id);
+		
+		ArrayList<Packet> list = courseService.getCourseListForStudent(student_username);
 		return new ResponseEntity<ArrayList<Packet>>(list, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/getOptedCourseList")
-	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_id") String student_id){
+	public ResponseEntity<ArrayList<Packet>> getOptedCourseList(@RequestParam("student_username") String student_username){
 		
-		ArrayList<Packet> list = courseService.getOptedCourseListForStudent(Integer.parseInt(student_id));
+		ArrayList<Packet> list = courseService.getOptedCourseListForStudent(student_username);
 		return new ResponseEntity<ArrayList<Packet>>(list, HttpStatus.OK);
 	}
 	
